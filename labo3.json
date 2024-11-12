@@ -1,0 +1,413 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "API de Gestion de Contenu de Cours",
+      "version": "1.0.0",
+      "description": "API REST pour gérer le contenu des cours en ligne, incluant les cours, séances, et l’organisation par module ou par semaine."
+    },
+   
+    "paths": {
+      "/courses": {
+        "get": {
+          "summary": "Obtenir la liste des cours",
+          "tags": [
+            "Cours"
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste des cours",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Course"
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "1",
+                      "title": "Introduction à la Programmation",
+                      "discipline": "Informatique",
+                      "tags": [
+                        "programmation",
+                        "débutant",
+                        "informatique"
+                      ],
+                      "sessions": [
+                        {
+                          "id": "101",
+                          "week": 1,
+                          "title": "Les bases de la programmation",
+                          "theme": "Syntaxe et variables"
+                        },
+                        {
+                          "id": "102",
+                          "week": 2,
+                          "title": "Les structures de contrôle",
+                          "theme": "Conditions et boucles"
+                        },
+                        {
+                          "id": "103",
+                          "week": 3,
+                          "title": "Les fonctions",
+                          "theme": "Définition et utilisation des fonctions"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "2",
+                      "title": "Développement Web",
+                      "discipline": "Informatique",
+                      "tags": [
+                        "web",
+                        "HTML",
+                        "CSS",
+                        "JavaScript"
+                      ],
+                      "sessions": [
+                        {
+                          "id": "201",
+                          "week": 1,
+                          "title": "Introduction au développement web",
+                          "theme": "HTML de base"
+                        },
+                        {
+                          "id": "202",
+                          "week": 2,
+                          "title": "Styliser les pages web",
+                          "theme": "Introduction au CSS"
+                        },
+                        {
+                          "id": "203",
+                          "week": 3,
+                          "title": "Programmation côté client",
+                          "theme": "JavaScript et manipulation du DOM"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Créer un nouveau cours",
+          "tags": [
+            "Cours"
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Cours créé avec succès"
+            }
+          }
+        }
+      },
+      "/courses/{courseId}": {
+        "get": {
+          "summary": "Obtenir un cours spécifique",
+          "tags": [
+            "Cours"
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Détails du cours",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Course"
+                  },
+                  "example": {
+                    "id": "1",
+                    "title": "Introduction à la Programmation",
+                    "discipline": "Informatique",
+                    "tags": [
+                      "programmation",
+                      "débutant",
+                      "informatique"
+                    ],
+                    "sessions": [
+                      {
+                        "id": "101",
+                        "week": 1,
+                        "title": "Les bases de la programmation",
+                        "theme": "Syntaxe et variables"
+                      },
+                      {
+                        "id": "102",
+                        "week": 2,
+                        "title": "Les structures de contrôle",
+                        "theme": "Conditions et boucles"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Mettre à jour un cours",
+          "tags": [
+            "Cours"
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Course"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Cours mis à jour avec succès",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Supprimer un cours",
+          "tags": [
+            "Cours"
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "204": {
+              "description": "Cours supprimé avec succès"
+            }
+          }
+        }
+      },
+      "/courses/{courseId}/sessions": {
+        "get": {
+          "summary": "Obtenir les séances d'un cours",
+          "tags": [
+            "Séances"
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Liste des séances",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Session"
+                    }
+                  },
+                  "example": [
+                    {
+                      "id": "101",
+                      "week": 1,
+                      "title": "Les bases de la programmation",
+                      "theme": "Syntaxe et variables"
+                    },
+                    {
+                      "id": "102",
+                      "week": 2,
+                      "title": "Les structures de contrôle",
+                      "theme": "Conditions et boucles"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Créer une nouvelle séance pour un cours",
+          "tags": [
+            "Séances"
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "201": {
+              "description": "Séance créée avec succès"
+            }
+          }
+        }
+      },
+      "/courses/{courseId}/sessions/{sessionId}": {
+        "put": {
+          "summary": "Mettre à jour une séance",
+          "tags": [
+            "Séances"
+          ],
+          "parameters": [
+            {
+              "name": "courseId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "sessionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Séance mise à jour avec succès",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Session"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Course": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "ID unique du cours"
+            },
+            "title": {
+              "type": "string",
+              "description": "Titre du cours"
+            },
+            "discipline": {
+              "type": "string",
+              "description": "Discipline du cours"
+            },
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Tags associés au cours"
+            },
+            "sessions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Session"
+              },
+              "description": "Séances associées au cours"
+            }
+          }
+        },
+        "Session": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "ID unique de la séance"
+            },
+            "week": {
+              "type": "integer",
+              "description": "Numéro de semaine"
+            },
+            "title": {
+              "type": "string",
+              "description": "Titre de la séance"
+            },
+            "theme": {
+              "type": "string",
+              "description": "Thématique de la séance"
+            }
+          }
+        }
+      }
+    }
+  }

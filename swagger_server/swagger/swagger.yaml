@@ -1,0 +1,114 @@
+---
+swagger: "2.0"
+info:
+  description: "API REST pour gérer le contenu des cours en ligne, incluant les cours,\
+    \ séances, et l’organisation par module ou par semaine."
+  version: "1.0.0"
+  title: "API de Gestion de Contenu de Cours"
+paths:
+  /courses:
+    get:
+      tags:
+      - "Cours"
+      summary: "Obtenir la liste des cours"
+      operationId: "courses_get"
+      parameters: []
+      responses:
+        "200":
+          description: "Liste des cours"
+      x-swagger-router-controller: "swagger_server.controllers.cours_controller"
+    post:
+      tags:
+      - "Cours"
+      summary: "Créer un nouveau cours"
+      operationId: "courses_post"
+      parameters: []
+      responses:
+        "201":
+          description: "Cours créé avec succès"
+      x-swagger-router-controller: "swagger_server.controllers.cours_controller"
+  /courses/{courseId}:
+    get:
+      tags:
+      - "Cours"
+      summary: "Obtenir un cours spécifique"
+      operationId: "courses_course_id_get"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        required: true
+      responses:
+        "200":
+          description: "Détails du cours"
+      x-swagger-router-controller: "swagger_server.controllers.cours_controller"
+    put:
+      tags:
+      - "Cours"
+      summary: "Mettre à jour un cours"
+      operationId: "courses_course_id_put"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        required: true
+      responses:
+        "200":
+          description: "Cours mis à jour avec succès"
+      x-swagger-router-controller: "swagger_server.controllers.cours_controller"
+    delete:
+      tags:
+      - "Cours"
+      summary: "Supprimer un cours"
+      operationId: "courses_course_id_delete"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        required: true
+      responses:
+        "204":
+          description: "Cours supprimé avec succès"
+      x-swagger-router-controller: "swagger_server.controllers.cours_controller"
+  /courses/{courseId}/sessions:
+    get:
+      tags:
+      - "Séances"
+      summary: "Obtenir les séances d'un cours"
+      operationId: "courses_course_id_sessions_get"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        required: true
+      responses:
+        "200":
+          description: "Liste des séances"
+      x-swagger-router-controller: "swagger_server.controllers.séances_controller"
+    post:
+      tags:
+      - "Séances"
+      summary: "Créer une nouvelle séance pour un cours"
+      operationId: "courses_course_id_sessions_post"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        required: true
+      responses:
+        "201":
+          description: "Séance créée avec succès"
+      x-swagger-router-controller: "swagger_server.controllers.séances_controller"
+  /courses/{courseId}/sessions/{sessionId}:
+    put:
+      tags:
+      - "Séances"
+      summary: "Mettre à jour une séance"
+      operationId: "courses_course_id_sessions_session_id_put"
+      parameters:
+      - name: "courseId"
+        in: "path"
+        required: true
+      - name: "sessionId"
+        in: "path"
+        required: true
+      responses:
+        "200":
+          description: "Séance mise à jour avec succès"
+      x-swagger-router-controller: "swagger_server.controllers.séances_controller"
+definitions: {}
