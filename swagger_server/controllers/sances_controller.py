@@ -5,7 +5,12 @@ from swagger_server import util
 
 
 def courses_course_id_sessions_get(courseId):  # noqa: E501
-    """Obtenir les séances d&#39;un cours
+    "get": {
+          "summary": "Obtenir les séances d'un cours",
+          "tags": [
+            "Séances"
+          ]
+    }
 
      # noqa: E501
 
@@ -20,7 +25,12 @@ def courses_course_id_sessions_get(courseId):  # noqa: E501
 
 
 def courses_course_id_sessions_post(courseId):  # noqa: E501
-    """Créer une nouvelle séance pour un cours
+    "post": {
+          "summary": "Créer une nouvelle séance pour un cours",
+          "tags": [
+            "Séances"
+          ]
+          }
 
      # noqa: E501
 
@@ -35,7 +45,12 @@ def courses_course_id_sessions_post(courseId):  # noqa: E501
 
 
 def courses_course_id_sessions_session_id_put(courseId, sessionId):  # noqa: E501
-    """Mettre à jour une séance
+    "put": {
+          "summary": "Mettre à jour une séance",
+          "tags": [
+            "Séances"
+          ]
+    }
 
      # noqa: E501
 
